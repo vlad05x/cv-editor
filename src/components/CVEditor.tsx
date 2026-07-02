@@ -81,6 +81,13 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
     });
   };
 
+  const handleHowIWorkChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange({
+      ...data,
+      howIWork: e.target.value.split('\n').filter(line => line.trim() !== '')
+    });
+  };
+
   // Generic List item helpers for Projects, Education, and Languages
 
   // --- PROJECTS ---
@@ -616,14 +623,26 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
         <div>
           <AccordionHeader id="soft" label="Soft Skills & Personality" icon={Compass} />
           <div className={`accordion-content ${activeSection === 'soft' ? 'open p-5' : ''}`}>
-            <div>
-              <label className="label-premium">Summary of Soft Skills</label>
-              <textarea 
-                value={data.softSkills} 
-                onChange={handleSoftSkillsChange} 
-                rows={4} 
-                className="input-premium resize-none" 
-              />
+            <div className="space-y-5">
+              <div>
+                <label className="label-premium">Summary of Soft Skills</label>
+                <textarea 
+                  value={data.softSkills} 
+                  onChange={handleSoftSkillsChange} 
+                  rows={4} 
+                  className="input-premium resize-none" 
+                />
+              </div>
+              <div>
+                <label className="label-premium">How I Work (One item per line)</label>
+                <textarea 
+                  value={(data.howIWork || []).join('\n')} 
+                  onChange={handleHowIWorkChange} 
+                  rows={4} 
+                  className="input-premium resize-none" 
+                  placeholder="I tell you about a blocker the day it happens..."
+                />
+              </div>
             </div>
           </div>
         </div>

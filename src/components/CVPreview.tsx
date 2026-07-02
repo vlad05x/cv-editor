@@ -228,6 +228,23 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
     );
   };
 
+  const HowIWorkSection = () => {
+    if (!data.howIWork || data.howIWork.length === 0) return null;
+    return (
+      <section>
+        <h3 className={`${densityStyles.h3} ${themeStyles.primaryText} ${themeStyles.border}`}>How I Work</h3>
+        <ul className="text-slate-600 font-light text-[12px] space-y-2 list-none m-0 p-0">
+          {data.howIWork.map((item, idx) => (
+            <li key={idx} className="relative pl-3">
+              <span className={`absolute left-0 top-[6px] w-1.5 h-1.5 rounded-full ${themeStyles.bullet} opacity-70`} />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  };
+
   const EducationSection = () => {
     if (!data.education || data.education.length === 0) return null;
     return (
@@ -306,7 +323,7 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
   const ProjectsSection = () => {
     if (!data.projects || data.projects.length === 0) return null;
     return (
-      <section className="flex-1">
+      <section className="print:block">
         <h3 className={`${densityStyles.h3} ${themeStyles.primaryText} ${themeStyles.border}`}>Technical Proficiencies</h3>
         <div className={densityStyles.listItemGap}>
           {data.projects.map((project, idx) => (
@@ -441,6 +458,7 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
             <SkillsSection />
             <LanguagesSection />
             <SoftSkillsSection />
+            <HowIWorkSection />
             <EducationSection />
           </div>
 
@@ -498,6 +516,7 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
             <EducationSection />
             <LanguagesSection />
             <SoftSkillsSection />
+            <HowIWorkSection />
           </div>
         </div>
       </div>
@@ -588,6 +607,7 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
           <SkillsSection />
           <LanguagesSection />
           <SoftSkillsSection />
+          <HowIWorkSection />
         </div>
 
         {/* Right Columns (Projects & Education) */}

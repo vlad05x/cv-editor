@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { Download, Printer, Palette, Type, Sliders, Layout, RotateCcw, FileUp, FileDown } from 'lucide-react';
+import { Download, Printer, Palette, Type, Sliders, Layout, RotateCcw, FileUp, FileDown, Save } from 'lucide-react';
 import { CVPreview } from './components/CVPreview';
 import { CVEditor } from './components/CVEditor';
 import { ImageCropperModal } from './components/ImageCropperModal';
@@ -116,6 +116,24 @@ function App() {
     }
   };
 
+  const handleSaveToCodebase = async () => {
+    try {
+      const response = await fetch('/api/save-cv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cvData)
+      });
+      if (response.ok) {
+        alert('Successfully saved to cvData.ts! Your local codebase is now updated. You can commit and push these changes.');
+      } else {
+        alert('Failed to save to codebase. Check terminal logs.');
+      }
+    } catch (error) {
+      console.error('Failed to save to codebase:', error);
+      alert('Error communicating with local server. Ensure Vite is running.');
+    }
+  };
+
   const handleImportJson = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -207,6 +225,15 @@ function App() {
           
           {/* Backup / Restore Controls */}
           <div className="flex items-center gap-3">
+            <button
+              onClick={handleSaveToCodebase}
+              className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors cursor-pointer bg-blue-500/10 hover:bg-blue-500/20 px-2.5 py-1 rounded-lg border border-blue-500/30 hover:border-blue-400 font-medium"
+              title="Save current data directly to src/data/cvData.ts"
+            >
+              <Save size={12} />
+              <span>Save to Code</span>
+            </button>
+            <div className="w-px h-4 bg-slate-700/50 mx-1"></div>
             <button
               onClick={handleExportJson}
               className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer bg-slate-800/40 hover:bg-slate-800 px-2.5 py-1 rounded-lg border border-slate-800/80 hover:border-slate-700 font-medium"
