@@ -326,7 +326,8 @@ function App() {
               >
                 <option value="classic">Split Columns</option>
                 <option value="modern">Modern Banner</option>
-                <option value="minimalist">Single Column</option>
+                <option value="minimalist">Grid Layout</option>
+                <option value="ats">ATS Optimized (Linear)</option>
               </select>
             </div>
 

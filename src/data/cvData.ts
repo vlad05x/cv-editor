@@ -5,7 +5,7 @@ export const defaultCvData = {
     "email": "organizm777alf@gmail.com",
     "phone": "+380964675403",
     "location": "Kropyvnytskyi, Ukraine",
-    "portfolio": "https://v0-react-portfolio-design-roan.vercel.app/",
+    "portfolio": "https://www.vlad05x.pp.ua/",
     "linkedin": "https://www.linkedin.com/in/vlad-honcharenko-34a6a8394/",
     "github": "https://github.com/vlad05x",
     "profileSummary": "I build fast, responsive interfaces in React and Next.js — and I care about the part most developers skip: making sure the client actually understands what they're getting. 4 years total coding experience, including 1+ year delivering production applications for paying clients as an independent freelancer and studio team member. Shipped 6+ projects end-to-end — from the first client call to a live, deployed product. Currently expanding into AI-driven automation and workflow integrations."
@@ -38,7 +38,7 @@ export const defaultCvData = {
       "Sanity CMS",
       "Responsive Design",
       "API Integration",
-      "AI-Assisted Development"
+      "AI-Assisted Development (Claude Code, Antigravity, Codex, Cursor, Ollama)"
     ]
   },
   "languages": [
@@ -65,19 +65,19 @@ export const defaultCvData = {
     {
       "degree": "Bachelor - Computer Science",
       "institution": "Central Ukrainian National Technical University",
-      "period": "9/2023 - present",
+      "period": "Sep 2023 - Expected 2027",
       "details": []
     },
     {
       "degree": "Frontend React Developer",
       "institution": "Shpp IT-school",
-      "period": "9/2023 - 2/2024",
+      "period": "Sep 2023 - Feb 2024",
       "details": []
     },
     {
       "degree": "Computer Science",
       "institution": "Lyceum \"Maximum\"",
-      "period": "9/2021 - 5/2023",
+      "period": "Sep 2021 - May 2023",
       "details": [
         "Advanced English and computer science",
         "C++ and frontend development"
@@ -89,37 +89,26 @@ export const defaultCvData = {
       "position": "Frontend Developer",
       "company": "Bifrost-studio ",
       "location": "Remote",
-      "period": "09.2025 – 03.2026",
+      "period": "Sep 2025 – Mar 2026",
       "responsibilities": [
-        "Part of a small team that shipped 5 commercial projects in a 1.5-month sprint — every one landed on the client's deadline, no extensions needed.",
-        "Took ownership of UI implementation and REST API integration, working directly against designer handoffs instead of waiting on backend specs to be finalized first.",
-        "Caught and fixed inconsistencies in the shared codebase during code review that would've caused visual bugs across two other client projects."
+        "Shipped 5 commercial web applications completely within a strict 1.5-month sprint deadline by coordinating closely within a high-velocity agile development team.",
+        "Reduced project delivery blockages by implementing production-ready UI components and mock REST API integrations directly from designer handoffs, bypassing backend finalization dependencies.",
+        "Prevented critical UI regression bugs across 2 concurrent client repositories by identifying and resolving structural design system conflicts during automated code reviews."
       ]
     },
     {
       "position": "React Developer | SaaS Developer | AI Automation",
       "company": "Freelance",
       "location": "Remote",
-      "period": "2025 – Present",
+      "period": "Jan 2025 – Present",
       "responsibilities": [
-        "Work directly with international clients end-to-end — from the first requirements call to a live, deployed product — without a project manager in between.",
-        "Built and shipped e-commerce, fitness, and beauty-brand platforms in React, Next.js, and TypeScript, each integrated with a real backend or CMS rather than static content.",
-        "More than half of my clients have come back for a second project or referred another client — the strongest signal I have that the work holds up after delivery."
+        "Achieved a >50% client retention and referral rate by managing full-cycle software delivery and consistently launching production-ready web products for international clients.",
+        "Architected and deployed 3 dynamic e-commerce, fitness, and beauty-brand platforms using Next.js and TypeScript, replacing static content with robust CMS and relational database systems to scale business operations.",
+        "Streamlined product discovery and time-to-market by eliminating administrative overhead, translating raw client business requirements directly into technical roadmaps and fully-deployed apps."
       ]
     }
   ],
   "projects": [
-    {
-      "name": "Glow & Grace",
-      "technologies": [
-        "Next.js",
-        "TypeScript",
-        "Tailwind",
-        "Sanity CMS"
-      ],
-      "description": "Developed a premium web platform for a Ukrainian beauty brand to streamline operations and enhance the user experience",
-      "link": "https://beauty-mastery.vercel.app/"
-    },
     {
       "name": "Karpaty International",
       "technologies": [
@@ -128,8 +117,45 @@ export const defaultCvData = {
         "SCSS",
         "Wordpress"
       ],
-      "description": "Developed a freelance solution for a Ukrainian educational institution, balancing modern performance with vibrant cultural aesthetics.",
+      "description": "Deployed a responsive platform for an educational institution, blending high performance with cultural aesthetics.Optimized asset delivery and load speeds for seamless access on low-bandwidth school networks.Simplified site navigation, reducing friction for students and educators accessing academic resources.",
       "link": "https://karpaty.school/en/"
+    },
+    {
+      "name": "Glow & Grace",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind",
+        "Sanity CMS"
+      ],
+      "description": "Engineered a high-performance web platform for a premium beauty brand, modernizing their digital presence and optimizing user experience.Streamlined content management workflows by integrating Sanity CMS, significantly reducing operational overhead for updating product catalogs.",
+      "link": "https://beauty-mastery.vercel.app/"
+    },
+    {
+      "name": "Royal Barber",
+      "technologies": [
+        "React",
+        "Vite",
+        "TypeScript",
+        "TailWind CSS",
+        "GSAP 3",
+        "Lenis "
+      ],
+      "description": "Engineered a responsive website for a premium barbershop, combining modern UI with intuitive navigation and booking workflows. Enhanced performance and mobile experience, delivering a polished digital presence that encourages customer conversions.",
+      "link": "royal-barber.vlad05x.pp.ua"
+    },
+    {
+      "name": "Kvitkovyi Sharm",
+      "technologies": [
+        "React",
+        "Vite",
+        "TypeScript",
+        "TailWind CSS",
+        "GSAP 3",
+        "Lenis "
+      ],
+      "description": "Developed a modern landing page for a floral brand, showcasing products through elegant visuals and intuitive navigation. Optimized performance and responsive design to create a seamless user experience that encourages customer inquiries and orders.",
+      "link": "kvitkovyi-sharm.vlad05x.pp.ua"
     },
     {
       "name": "Forge Gym",
@@ -139,19 +165,8 @@ export const defaultCvData = {
         "Tailwind",
         "Framer Motion"
       ],
-      "description": "Built to convert visitors into sign-ups on mobile, where most of their traffic actually comes from. Fast load, smooth animations, no bloated template feel.",
+      "description": "Optimized mobile visitor-to-signup conversion pathways by developing a lightweight, zero-bloat web application. Enhanced user engagement and minimized bounce rates by delivering seamless, hardware-accelerated animations and reducing page-load latency on mobile networks.",
       "link": "https://forge-gym-gold.vercel.app/"
-    },
-    {
-      "name": "Starbucks Practice",
-      "technologies": [
-        "Next.js",
-        "TypeScript",
-        "Tailwind",
-        "Material UI"
-      ],
-      "description": "Executed during a university internship at an IT company, this project mirrors a production-level ecosystem. It demonstrates the ability to meet strict technical specifications and deliver high-end design standards.",
-      "link": "https://starbucks-rosy-beta.vercel.app/"
     },
     {
       "name": "Magnifier Pro",
@@ -160,25 +175,15 @@ export const defaultCvData = {
         "JavaScript",
         "SCSS"
       ],
-      "description": "Developed a direct-response landing page for a Fiverr client, specifically engineered to drive app downloads. The project combined professional aesthetics with clear messaging to meet strict commercial goals.",
+      "description": "Built a high-converting landing page for a Fiverr client to drive mobile app downloads.Combined professional commercial design with clear, direct-response messaging.",
       "link": "https://vlad05x.github.io/MagnifierPro/"
-    },
-    {
-      "name": "DoughDelights",
-      "technologies": [
-        "Next.js",
-        "TypeScript",
-        "Tailwind"
-      ],
-      "description": "A full-featured e-commerce platform designed for a bakery brand. Implemented a seamless ordering flow and a responsive UI, leveraging AI tools to accelerate the design-to-development cycle.",
-      "link": "https://donut-shop-henna.vercel.app/"
     }
   ],
   "customization": {
     "themeColor": "obsidian",
     "fontFamily": "sans",
     "density": "normal",
-    "layoutStyle": "classic"
+    "layoutStyle": "ats"
   }
 };
 

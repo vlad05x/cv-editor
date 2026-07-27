@@ -523,9 +523,87 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
     );
   }
 
-  // 3. MINIMALIST SINGLE COLUMN LAYOUT
+  // 3. ATS OPTIMIZED LINEAR LAYOUT
+  if (layout === 'ats') {
+    return (
+      <div ref={ref} className={`a4-page flex flex-col ${fontClasses} ${densityStyles.text} bg-white ${densityStyles.padding}`}>
+        {/* Simple Text Header (No Photo for ATS safety) */}
+        <header className="flex flex-col items-center justify-center text-center border-b-2 border-slate-900 pb-5 flex-shrink-0">
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-950 uppercase">{data.personalInfo.name}</h1>
+          <h2 className={`text-base font-bold uppercase tracking-wider ${themeStyles.accentText} mt-1.5`}>{data.personalInfo.title}</h2>
+          
+          <div className="mt-3 flex flex-wrap justify-center gap-y-1.5 gap-x-4 text-[12px] text-slate-600 font-medium">
+            <a href={`mailto:${data.personalInfo.email}`} className="hover:text-slate-900">{data.personalInfo.email}</a>
+            <span>|</span>
+            <a href={`tel:${data.personalInfo.phone}`} className="hover:text-slate-900">{data.personalInfo.phone}</a>
+            <span>|</span>
+            <span>{data.personalInfo.location}</span>
+            {data.personalInfo.linkedin && (
+              <>
+                <span>|</span>
+                <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900">LinkedIn</a>
+              </>
+            )}
+            {data.personalInfo.github && (
+              <>
+                <span>|</span>
+                <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900">GitHub</a>
+              </>
+            )}
+            {data.personalInfo.portfolio && (
+              <>
+                <span>|</span>
+                <a href={data.personalInfo.portfolio.startsWith('http') ? data.personalInfo.portfolio : `https://${data.personalInfo.portfolio}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900">Portfolio</a>
+              </>
+            )}
+          </div>
+        </header>
+
+        {/* Linear Content Flow */}
+        <div className="flex flex-col gap-6 w-full">
+          {/* Summary */}
+          {data.personalInfo.profileSummary && (
+            <section>
+              <h3 className={`${densityStyles.h3} ${themeStyles.primaryText} ${themeStyles.border}`}>Professional Summary</h3>
+              <p className="text-slate-700 leading-relaxed font-light">{data.personalInfo.profileSummary}</p>
+            </section>
+          )}
+
+          {/* Core Skills (Text-based, no badges for safe ATS parsing) */}
+          <section>
+            <h3 className={`${densityStyles.h3} ${themeStyles.primaryText} ${themeStyles.border}`}>Technical Skills</h3>
+            <div className="flex flex-col gap-1.5 text-slate-700 text-[13px]">
+              {data.skills.frontend.length > 0 && (
+                <div><span className="font-bold">Frontend:</span> {data.skills.frontend.join(', ')}</div>
+              )}
+              {data.skills.backend.length > 0 && (
+                <div><span className="font-bold">Backend:</span> {data.skills.backend.join(', ')}</div>
+              )}
+              {data.skills.other.length > 0 && (
+                <div><span className="font-bold">Other/DevOps:</span> {data.skills.other.join(', ')}</div>
+              )}
+            </div>
+          </section>
+
+          {/* Work Experience */}
+          <WorkExperienceSection />
+
+          {/* Projects */}
+          <ProjectsSection />
+
+          {/* Education */}
+          <EducationSection />
+
+          {/* Languages */}
+          <LanguagesSection />
+        </div>
+      </div>
+    );
+  }
+
+  // 4. GRID / MINIMALIST LAYOUT
   return (
-    <div ref={ref} className={`a4-page flex flex-col ${fontClasses} ${densityStyles.text} bg-white p-8 gap-5 relative`}>
+    <div ref={ref} className={`a4-page flex flex-col ${fontClasses} ${densityStyles.text} bg-white ${densityStyles.padding} relative`}>
       {/* Header Info */}
       <header className="flex justify-between items-start border-b-2 border-slate-900 pb-4 flex-shrink-0">
         <div className="flex-1">
@@ -586,9 +664,9 @@ export const CVPreview = forwardRef<HTMLDivElement, CVPreviewProps>(({ data, pho
           </div>
         </div>
 
-        {/* Small Elegant square photo */}
+        {/* Profile photo */}
         {photoUrl && (
-          <div className="w-16 h-16 border-2 border-slate-950/80 rounded-md overflow-hidden bg-slate-100 flex-shrink-0 ml-4">
+          <div className="w-32 h-32 border-2 border-slate-950/80 rounded-md overflow-hidden bg-slate-100 flex-shrink-0 ml-4 shadow-sm">
             <img src={photoUrl} alt={data.personalInfo.name} className="w-full h-full object-cover" />
           </div>
         )}

@@ -12,7 +12,8 @@ import {
   Plus, 
   Trash2, 
   ChevronDown,
-  Building2
+  Building2,
+  GripVertical
 } from 'lucide-react';
 
 interface CVEditorProps {
@@ -23,6 +24,37 @@ interface CVEditorProps {
 
 export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUpload }) => {
   const [activeSection, setActiveSection] = useState<string>('personal');
+  const [draggedProjectIndex, setDraggedProjectIndex] = useState<number | null>(null);
+
+  const handleProjectDragStart = (e: React.DragEvent, index: number) => {
+    setDraggedProjectIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleProjectDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleProjectDrop = (e: React.DragEvent, targetIndex: number) => {
+    e.preventDefault();
+    if (draggedProjectIndex === null || draggedProjectIndex === targetIndex) return;
+
+    const newProjects = [...data.projects];
+    const draggedProject = newProjects[draggedProjectIndex];
+    newProjects.splice(draggedProjectIndex, 1);
+    newProjects.splice(targetIndex, 0, draggedProject);
+
+    onChange({
+      ...data,
+      projects: newProjects
+    });
+    setDraggedProjectIndex(null);
+  };
+
+  const handleProjectDragEnd = () => {
+    setDraggedProjectIndex(null);
+  };
 
   const toggleSection = (section: string) => {
     setActiveSection(activeSection === section ? '' : section);
@@ -84,7 +116,7 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
   const handleHowIWorkChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange({
       ...data,
-      howIWork: e.target.value.split('\n').filter(line => line.trim() !== '')
+      howIWork: e.target.value.split('\n')
     });
   };
 
@@ -108,7 +140,7 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
     const updated = data.projects.map((proj, idx) => {
       if (idx === index) {
         if (key === 'technologies') {
-          return { ...proj, [key]: value.split(',').map((t: string) => t.trim()).filter(Boolean) };
+          return { ...proj, [key]: value.split(',').map((t: string) => t.trimStart()) };
         }
         return { ...proj, [key]: value };
       }
@@ -142,7 +174,7 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
     const updated = data.education.map((edu, idx) => {
       if (idx === index) {
         if (key === 'details') {
-          return { ...edu, [key]: value.split('\n').map((l: string) => l.trim()).filter(Boolean) };
+          return { ...edu, [key]: value.split('\n') };
         }
         return { ...edu, [key]: value };
       }
@@ -203,7 +235,7 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
     const updated = (data.workExperience ?? []).map((exp, idx) => {
       if (idx !== index) return exp;
       if (key === 'responsibilities') {
-        return { ...exp, responsibilities: value.split('\n').map((l: string) => l.trim()).filter(Boolean) };
+        return { ...exp, responsibilities: value.split('\n') };
       }
       return { ...exp, [key]: value };
     });
@@ -449,7 +481,18 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
           <div className={`accordion-content ${activeSection === 'projects' ? 'open p-5' : ''}`}>
             <div className="space-y-6">
               {data.projects.map((project, index) => (
-                <div key={index} className="p-4 bg-slate-800/40 rounded-xl border border-slate-700/60 relative group">
+                <div 
+                  key={index} 
+                  draggable
+                  onDragStart={(e) => handleProjectDragStart(e, index)}
+                  onDragOver={(e) => handleProjectDragOver(e, index)}
+                  onDrop={(e) => handleProjectDrop(e, index)}
+                  onDragEnd={handleProjectDragEnd}
+                  className={`p-4 bg-slate-800/40 rounded-xl border ${draggedProjectIndex === index ? 'border-blue-500 opacity-50' : 'border-slate-700/60'} relative group transition-colors`}
+                >
+                  <div className="absolute top-4 left-2 text-slate-500 cursor-grab hover:text-slate-300 active:cursor-grabbing">
+                    <GripVertical size={16} />
+                  </div>
                   <button 
                     onClick={() => deleteProject(index)}
                     className="absolute top-3 right-3 text-slate-500 hover:text-red-400 p-1 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer"
@@ -457,7 +500,7 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange, onPhotoUploa
                   >
                     <Trash2 size={14} />
                   </button>
-                  <div className="space-y-3">
+                  <div className="space-y-3 pl-6">
                     <div>
                       <label className="label-premium">Project Name</label>
                       <input 
